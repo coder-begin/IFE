@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第三章</title>
+</head>
+<body>
+<script>
+    //模块模式:
+    //1.创建命名空间
+    var MYAPP = MYAPP || {};//如果有MYAPP这个对象了就直接赋值，没有就创建
+    MYAPP.namespace = function (spaceName) {
+        var parts = spaceName.split("."),//将空间名称进行分解
+                tempObj = MYAPP,
+                i;
+        if (parts[0] === "MYAPP") {
+            parts = parts.slice(1);//如果空间名第一个是MYAPP就直接截取以下部分，因为上面已经定义过MYAPP对象了
+        }
+        for (i = 0; i < parts.length; i++) {
+            if (typeof  tempObj[parts[i]] === "undefined") {
+                tempObj[parts[i]] = {};
+            }
+            tempObj = parts[i];
+
+
+        }
+        return tempObj;//返回定义的最后一个对象
+
+
+    };
+    MYAPP.namespace("MYAPP.until.array");
+    //使用闭包可以使得内容为私有的，在外部不能访问
+    MYAPP.until.array = (function () {
+        //定义函数依赖，就是把要用到的全局函数或者变量都定义为局部的
+        var doc = document;
+        //返回自己定义的array对象的方法
+        //1.返回方法
+     /*   return {
+            //从小到大排序
+
+            mySort: function (arr) {
+                var temp;
+                for (var i = 0; i < arr.length; i++) {
+                    for (var j = i; j < arr.length; j++) {
+                        if (arr[i] > arr[j]) {
+                            temp = arr[i];
+                            arr[i] = arr[j];
+                            arr[j] = temp;
+                        }
+                    }
+                }
+            }
+
+
+
+        }
+    */
+        //2.返回方法的引用
+/*
+        function  mySort(arr) {
+            var temp;
+            for (var i = 0; i < arr.length; i++) {
+                for (var j = i; j < arr.length; j++) {
+                    if (arr[i] > arr[j]) {
+                        temp = arr[i];
+                        arr[i] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+        }
+
+
+        return{
+            mySort:mySort
+        }
+*/
+
+        //3.返回构造函数
+       /*
+        var Constr=function(age){
+            this.age=age;
+
+        }
+        Constr.prototype.constructor=MYAPP.until.array;
+        Constr.prototype.getAge=function(){
+            return this.age;
+
+        }
+        return Constr;
+        */
+
+    })();
+    function test() {
+        var arr = [0, 9, 6, 5, 8];
+        MYAPP.until.array.mySort(arr);
+        alert(arr);
+
+    }
+
+//    test();
+//
+
+
+    //2。闭包实现静态私有变量
+    // 闭包会维持着闭包所在的空间.
+//       var  test= (function(){
+//            var num=0;
+//
+//            return function (){
+//                console.log(++num);
+//            }
+//
+//        })();
+//        var test1=new test();
+//
+//        var test2=new test();
+
+
+//    3.链式操作
+      /*  var test={
+            value:5,
+            add:function (){
+                this.value++;
+                return this;
+            },
+            cheng:function(){
+               this.value*=2;
+                return this;
+            },
+            show:function(){
+                console.log(this.value)
+            }
+
+
+
+        }
+    test.add().cheng().show();//需要操作的数据是一个共有数据，并且链式操作前几个函数需要返回this指针作为下一个函数调用的对象
+
+    */
+//    4.语法糖，不多说
+</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test36</title>
+    <style>
+
+
+    </style>
+</head>
+<body>
+<div style="margin-left: 48px">
+    <canvas id="topNum" width="400" height="40"></canvas>
+</div>
+<div>
+    <canvas id="leftNum" width="40" height="400"></canvas>
+    <canvas id="grid" width="400" height=" 400" style="border: 1px solid black;margin-left: 0px;"></canvas>
+    <canvas id="repaintGrid" width="400" height="400" style="float: left;left: 56px;position: absolute"></canvas>
+</div>
+<div style="margin-left: 45px;margin-top: 3px" id="go">
+    <button id="carryOut">执行</button>
+    <button id="refresh">Refresh</button>
+</div>
+<div style="margin-left: 45px;margin-top: 6px">
+    <canvas id="orderNum" width="30" height="206" style="background-color: #CACACA"></canvas><textarea id="orders" style="width: 375px;height: 200px;background-color: #0f0f0f;color: yellow;font-size: 20px" ></textarea>
+
+</div>
+
+<script src="../js/addCode.js"></script>
+<script>
+    addCode("../js/test36.js",function(){});
+
+</script>
+</body>
+</html>

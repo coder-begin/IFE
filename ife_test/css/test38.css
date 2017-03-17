@@ -1,0 +1,42 @@
+#pageDiv{
+    display: none;
+    background-color:rgba(0,0,0,0.5);
+    position:fixed;
+    float:left;
+    left:0;
+    top:0;
+}
+#pageDiv *{
+    display: none;
+
+}
+#pageDiv>div{
+    width: 50%;
+    height: 50%;
+    position: absolute;
+}
+#pageDiv>div>div:first-child{
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    background-color: #2aabd2;
+    position: absolute;
+
+}
+#pageDiv>div>div:last-child{
+    top: 20%;
+    left:0;
+    height: 80%;
+    position: absolute;
+    width: 100%;
+    background-color: #9acfea;
+
+}
+#pageDiv>div>div:last-child>button{
+    float: right;
+    margin:28% 1% 1% 1%;
+    width: 18%;
+    height: 20%;
+    bottom: 5px;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test18</title>
+</head>
+<body>
+<div style="padding:10px;background-color:cornflowerblue;width:450px;height:70px;position: absolute;left: 30%;top: 30%">
+    <div id="page1">
+        <input type="text" width="50px" id="insertText">
+        <button id="leftIn">左侧入</button>
+        <button id="rightIn">右侧入</button>
+        <button id="leftOut">左侧出</button>
+        <button id="rightOut">右侧出</button>
+    </div>
+    <div id="showInsert" style="position: absolute;margin: 2px;width: 440px;height: 40px;background-color: cadetblue">
+
+    </div>
+
+
+</div>
+<script>
+
+    var showInsert = document.getElementById("showInsert");
+    var btnAll = document.querySelectorAll("#page1 button");
+    function init() {
+        (function () {
+            for (var i = 0; i < btnAll.length; i++) {
+
+                btnAll[i].onclick = insertSth;
+
+
+            }
+        })();
+    }
+
+
+
+    function insertSth() {
+        var pressBtn = document.activeElement;
+
+        switch (pressBtn.id) {
+            case "leftIn":
+                    if(showInsert.children[0]){
+                        showInsert.insertBefore(getInsertElem(),showInsert.children[0]);
+                    }else{
+                        showInsert.appendChild(getInsertElem());
+                    }
+
+                break;
+            case "rightIn":
+                showInsert.appendChild(getInsertElem());
+
+                break;
+            case "leftOut":
+                    if(showInsert.children[0]){
+                        showInsert.removeChild(showInsert.children[0]);
+                    }
+
+                break;
+            case "rightOut":
+                    if(showInsert.lastChild){
+                        showInsert.removeChild(showInsert.lastChild);;
+
+                    }
+
+
+                break;
+        }
+
+
+    }
+    function  getInsertElem(){
+        var insertText = document.getElementById("insertText").value;
+            var spanInsert=document.createElement("p");
+
+
+            spanInsert.textContent=insertText;
+            spanInsert.style.display="inline-block";
+            spanInsert.style.margin="2px";
+
+            spanInsert.style.width="38px";
+            spanInsert.style.height="40px";
+            spanInsert.style.textAlign="center";
+            spanInsert.style.backgroundColor="blue";
+            return spanInsert;
+
+
+    }
+
+        init();
+</script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>设计模式</title>
+</head>
+<body>
+
+<script>
+    //1.单例模式
+    //直接使用字面量创建
+    /*var person={
+        age:12
+
+    }*/
+    //使用构造函数创建
+    /*function  Person(){
+        if(Person.instance==="object"){
+            return Person.instance;
+        }
+        Person.instance=this;//使用instance来存储第一次创建的对象，以后创建的时候会直接返回第一次创建的对象
+
+
+    }*/
+    //也可以使用闭包来实现
+    /*function  Person(){
+        var instance=this;//保存第一次创建的时候的指针
+        Person=function(){
+            return instance;//后面的创建都是返回第一次创建的指针
+        }
+
+    }*/
+
+    //2.工厂模式，可以根据传入的不同类型的值来返回不同的对象实例
+    /*function  CarMaker(){}//定义一个汽车制造厂
+    //给每辆汽车一个功能
+    CarMaker.prototype.drive=function(){
+        alert(this.speed);
+    }
+    //给他一个制造的静态功能,传入要制造的汽车类型
+    CarMaker.factory=function(type) {
+        var cartype = type;
+        //判断要造的汽车类型是否存在
+        if (typeof CarMaker[cartype] !== "function") {
+            throw{
+                name: "error",
+                message: cartype + "is not in the factory"
+            }
+
+        }
+        //判断drive方法是否存在
+        if(typeof  CarMaker[cartype].prototype.drive!=="function"){
+            CarMaker[cartype].prototype=new CarMaker();
+        }
+
+        if(typeof CarMaker[cartype]==="function"){
+            return new CarMaker[cartype]();
+        }
+
+
+    }
+    //定义制造商能够制造的汽车类型
+    CarMaker.baoma=function(){
+        this.speed=5;
+    }
+    var mycar=new CarMaker.factory("baoma");
+    mycar.drive();
+
+
+    }
+    */
+    //装饰着模式:重点
+/*
+    //1.定义一个需要装饰构造函数
+    function  Sale(price){
+        this.price=price;
+    }
+    //定义获取钱的方法
+    Sale.prototype.getPrice=function(){
+        return this.price;
+    }
+    //2.定义装饰对象
+    Sale.decorator={};
+    //3.定义装饰方法
+    Sale.prototype.decorate=function(type){
+        var F=function (){}
+        var newObj, nowDecorate=this.constructor.decorator[type];//获取马上要装饰的装饰类型
+        F.prototype=this;
+        newObj=new F();
+        newObj.uber= F.prototype;
+        for(var i in nowDecorate){
+            if(nowDecorate.hasOwnProperty(i)){
+                newObj[i]=nowDecorate[i];
+            }
+        }
+        return newObj;
+    }
+
+    //4.定义具体装饰对象
+    Sale.decorator.quebec={
+        getPrice: function () {
+            var price=this.uber.getPrice();//上步的钱
+            price+=200;//经过这步的钱
+            return price;
+        }
+    };
+
+    var sale=new Sale(100);
+    sale=sale.decorate("quebec");
+    sale=sale.decorate("quebec");
+   alert( sale.getPrice());
+    */
+
+    /*
+    //装饰者模式2:
+    //使用列表来实现装饰
+    //定义一个装饰者列表
+    function  Sale(price,age){
+        this.price=(price>0)?price:100;//初始化价格
+        this.age=(age>0)?age:20;
+        this.priceDecorateList=[];           //存储将要进行的修饰方法
+        this.ageDecorateList=[];
+        this.getSth="price,age";    //存储可获取的值
+    }
+    //定义一个静态装饰对象来存储可能的装饰方法
+    Sale.decorators={};
+    //对于价格的修饰方法
+    Sale.decorators.getPrice={
+        fedtax:function(price){
+            return price+200;
+        }
+
+
+    }
+    //对于年龄的修饰方法
+    Sale.decorators.getAge={
+
+        olderOne:function(age){
+            return ++age;
+        },
+        olderTwo:function(age){
+            return age+=2;
+        }
+
+
+
+    }
+    //定义装饰方法
+    Sale.prototype.decoratePrice=function(decorateType){
+        this.priceDecorateList.push(decorateType);
+    }
+    Sale.prototype.decorateAge=function(decorateType){
+        this.ageDecorateList.push(decorateType);
+    }
+    //获取修饰后的数据
+
+    Sale.prototype.get=function(sth){
+        //判断获取的数据是否存在
+            if(this.getSth.search(sth)!==-1){
+                var list,listLength;
+                switch (sth){
+                    //获取年龄
+                    case "age":
+                        list=this.ageDecorateList;
+                        listLength=this.ageDecorateList.length;
+                        var  nowAge=this.age,getAge=Sale.decorators["getAge"];
+                        for(var i=0 ;i<listLength;i++){
+                            //遍历所有修饰方法名字
+                            nowAge=getAge[list[i]](nowAge);
+                        }
+                        return nowAge;
+                    //获取价格
+                    case "price":
+                        list=this.priceDecorateList;
+                        listLength=this.priceDecorateList.length;
+                        var  nowPrice=this.price,getPrice=Sale.decorators["getPrice"];
+                        for(var i=0 ;i<listLength;i++){
+                            //遍历所有修饰方法名字
+                            nowPrice=getPrice[list[i]](nowPrice);
+                        }
+                        return nowPrice;
+
+                }
+
+            }else{
+                alert("不能获取此数值！！");
+            }
+
+
+
+    }
+    var sale=new Sale(50,12);
+    sale.decoratePrice("fedtax");
+    sale.decoratePrice("fedtax");
+    sale.decorateAge("olderOne");
+    sale.decorateAge("olderTwo");
+    document.write(sale.get("price")+"<br>");
+    document.write(sale.get("age")+"<br>");
+    */
+
+    /*
+    外观模式:将要执行的事件处理进行封装，例如对跨浏览器的方法进行封装
+
+    */
+
+    /*
+    中介模式:
+    定义一个中介对象，所有对象都和中介对象相连
+    由中介来new相连对象，并实现他们之间的操作
+
+
+     */
+
+    /*
+    观察者模式:
+    就是订阅/发布模式
+    定义一个发布对象，发布对象要有订阅者数组，添加订阅者，删除订阅者，发布的功能
+    发布的同时检测订阅者中有谁订阅的这个事件以执行订阅者的方法
+    定义一个发布者制造对象，将一个对象转变成发布者，就是将发布者对象中的方法都赋值给它
+
+
+
+     */
+ </script>
+</body
+
+>
+</html>

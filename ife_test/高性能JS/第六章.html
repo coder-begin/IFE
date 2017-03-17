@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第六章</title>
+</head>
+<body>
+
+<script>
+    /*
+    1.100ms以内为js执行时间才是最好的
+    2.可以将需要处理内容分段处理，使用setTimeout来分段处理，每一个时间段处理一点，这样空出的时间就可以响应UI组建
+    3.可以使用worker来处理大数据，前提是这些数据仅仅是数据，不能和页面有关，如json数据，当然，浏览器要支持worker才行
+
+
+
+     */
+    var worker=new Worker("test.js");
+    worker.onmessage=function(e){
+        alert(e.data);
+    };
+    worker.postMessage(50);
+
+
+</script>
+</body>
+</html>

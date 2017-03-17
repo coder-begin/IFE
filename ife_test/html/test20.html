@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test20</title>
+</head>
+<body>
+<div style="padding:10px;background-color:cornflowerblue;height:170px;position: absolute;left: 30%;top: 30%">
+    <div id="page1">
+
+        <textarea id="insertText"></textarea>
+        <button id="search">搜索</button>
+        <button id="leftIn">左侧入</button>
+        <button id="rightIn">右侧入</button>
+        <button id="leftOut">左侧出</button>
+        <button id="rightOut">右侧出</button>
+    </div>
+    <div id="showInsert" style="position: absolute;margin: 2px;">
+
+    </div>
+
+
+</div>
+<script>
+        /*
+
+         基于任务18进行升级
+         将新元素输入框从input改为textarea
+         允许一次批量输入多个内容，格式可以为数字、中文、英文等，可以通过用回车，逗号（全角半角均可），顿号，空格（全角半角、Tab等均可）等符号作为不同内容的间隔
+         增加一个查询文本输入框，和一个查询按钮，当点击查询时，将查询词在各个元素内容中做模糊匹配，将匹配到的内容进行特殊标识，如文字颜色等。举例，内容中有abcd，查询词为ab或bc，则该内容需要标识
+
+         */
+    var showInsert = document.getElementById("showInsert");
+    var btnAll = document.querySelectorAll("#page1 button");
+    function init() {
+        (function () {
+            for (var i = 0; i < btnAll.length; i++) {
+
+                btnAll[i].onclick = insertSth;
+
+
+            }
+        })();
+    }
+
+
+
+    function insertSth() {
+        var pressBtn = document.activeElement;
+
+        switch (pressBtn.id) {
+            case "leftIn":
+                if (showInsert.children[0]) {
+                    showInsert.insertBefore(getInsertElem(), showInsert.children[0]);
+                } else {
+                    showInsert.appendChild(getInsertElem());
+                }
+
+                break;
+            case "rightIn":
+                showInsert.appendChild(getInsertElem());
+
+                break;
+            case "leftOut":
+
+                if (showInsert.children[0]) {
+                    showInsert.children[0].onclick = null;
+                    showInsert.removeChild(showInsert.children[0]);
+                }
+
+                break;
+            case "rightOut":
+                if (showInsert.lastChild) {
+                    showInsert.lastChild.onclick = null;
+                    showInsert.removeChild(showInsert.lastChild);
+                    ;
+
+                }
+                break;
+            case "search":
+                search();
+                break;
+        }
+
+
+    }
+        function search(){
+            var insertText = document.getElementById("insertText").value;
+            var child= showInsert.children;
+
+
+
+
+            (function () {
+                for (var i=0;i<child.length;i++){
+                    child[i].style.backgroundColor="blue";
+                    if(child[i].textContent==insertText){
+
+                        child[i].style.background="yellow";
+                    }
+
+
+                }
+
+
+            })();
+
+
+        }
+    function  getInsertElem(){
+
+        var insertText = document.getElementById("insertText").value;
+        var spanInsert=document.createElement("p");
+        spanInsert.style.display="inline-block";
+        spanInsert.style.margin="2px";
+        spanInsert.style.fontSize="16px";
+        spanInsert.style.padding="2px";
+        spanInsert.style.textAlign="center";
+        spanInsert.style.backgroundColor="blue";
+        spanInsert.textContent=insertText;
+        return spanInsert;
+
+
+    }
+
+    init();
+</script>
+</body>
+</html>

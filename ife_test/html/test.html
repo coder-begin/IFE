@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>test</title>
+</head>
+<body>
+
+
+<input type="text" id="textAdd">
+<button id="add">添加</button>
+<button id="del">删除</button>
+<script>
+    var add=document.getElementById("add");
+    var del=document.getElementById("del");
+
+    var str=[0,0,0,0];
+    function addText(){
+        var text=document.getElementById("textAdd").value;
+        (function(){
+            for(var i=0;i<4;i++){
+                if(str[i]==0){
+                    str[i]=text;
+                    break;
+                }
+            }
+
+        })();
+
+        alert(str);
+
+    }
+    function delText(){
+        (function(){
+            var text=document.getElementById("textAdd").value;
+            for(var i=0;i<4;i++){
+                if(str[i]==text){
+                    str[i]=0;
+                }
+            }
+
+        alert(str);
+
+        })();
+    }
+
+    add.onclick=addText;
+    del.onclick=delText;
+
+
+</script>
+</body>
+</html>

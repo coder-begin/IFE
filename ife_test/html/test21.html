@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test21</title>
+</head>
+<body>
+<div style="padding:10px;background-color:cornflowerblue;height:470px;position: absolute;">
+    <div id="tagsMain">
+        <span style="font-size: 25px">Tag:</span>
+        <input type="text" style="height: 30px;width: 240px" id="tagText">
+        <div id="showTags" style="margin: 20px">
+
+
+        </div>
+    </div>
+    <div id="hobbiesMain" style="position: absolute;margin: 2px;">
+        <textarea id="hobbyArea"></textarea>
+        <div>
+            <button id="hobbyConfirm">确认兴趣爱好</button>
+        </div>
+        <div id="showHobbies">
+        </div>
+    </div>
+</div>
+<script>
+    var tag = document.getElementById("tagText");
+    var btnConfirm = document.getElementById("hobbyConfirm");
+    var tenTagFlag = 1;
+    var tenHobbyFlag = 1;
+    var addFlag = true;
+
+    var mouseenterFlag = false;
+    function init() {
+        tag.addEventListener("keypress", addElem, false);
+        btnConfirm.onclick = addElem;
+    }
+
+    function addElem(event) {
+        var focusId = document.activeElement.id;
+        switch (focusId) {
+            case "tagText":
+                var charCode = event.charCode;
+                if (charCode == 44 || charCode == 13 || charCode == 32) {
+                    var showTags = document.getElementById("showTags");
+                    var tagShow = document.getElementById("tagText").value;
+                    if (tenTagFlag < 10) {
+
+                        if (judgeRepeat(tagShow, "showTags")) {
+                            var newTag = getInsertElem(tagShow);
+                            showTags.appendChild(newTag);
+                            newTag.onmouseenter = frontaddDel;
+                            newTag.onmouseleave = frontDeleteDel;
+                            tenTagFlag++;
+                        }
+                    } else {
+                        var newTag = getInsertElem(tagShow);
+                        showTags.removeChild(showTags.firstChild);
+                        showTags.appendChild(newTag);
+                        newTag.onmouseenter = frontaddDel;
+                        newTag.onmouseleave = frontDeleteDel;
+
+                    }
+                }
+                break;
+            case "hobbyConfirm":
+                var showHobbies = document.getElementById("showHobbies");
+                var hobbyShow = document.getElementById("hobbyArea").value;
+                var str = hobbyShow.split(",");
+                (function () {
+
+
+                    for (var i = 0; i < str.length; i++) {
+                        if (tenHobbyFlag < 10) {
+                            if (judgeRepeat(str[i], "showHobbies")) {
+                                showHobbies.appendChild(getInsertElem(getDealedText(str)[i]));
+                                tenHobbyFlag++;
+                            }
+
+                        } else {
+                            if (judgeRepeat(str[i], "showHobbies")) {
+                                showHobbies.removeChild(showHobbies.firstChild);
+                                showHobbies.appendChild(getInsertElem(getDealedText(str)[i]));
+
+                            }
+                        }
+
+
+                    }
+
+                })();
+                break;
+        }
+    }
+    function getDealedText(str) {
+        var newData = [];
+        (function () {
+            for (var i = 0; i < str.length; i++) {
+                newData.push(str[i].trim());
+            }
+        })();
+        return newData;
+    }
+    function judgeRepeat(insertText, id) {
+        if (document.getElementById(id).children) {
+            var child = document.getElementById(id).children;
+            var getReturn = (function () {
+                for (var i = 0; i < child.length; i++) {
+                    if (child[i].textContent == insertText) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+
+                }
+
+                return true;
+            })();
+            return getReturn;
+        }
+
+
+    }
+    function frontaddDel(e) {
+        if (!mouseenterFlag) {
+            var showTags = document.getElementById("showTags");
+            var btnDel = document.createElement("button");
+            btnDel.textContent = "删除";
+            showTags.insertBefore(btnDel, e.target);
+            btnDel.onclick = function () {
+                showTags.removeChild(btnDel.nextSibling);
+                showTags.removeChild(btnDel);
+                mouseenterFlag = false;
+            }
+        }
+        mouseenterFlag = true;
+
+    }
+    function frontDeleteDel(e) {
+        var showTags = document.getElementById("showTags");
+        setTimeout(function () {
+            if (e.target.previousSibling) {
+                showTags.removeChild(e.target.previousSibling);
+                mouseenterFlag = false;
+            }
+        }, 3000);
+
+    }
+
+
+    function getInsertElem(str) {
+        var spanInsert = document.createElement("p");
+        spanInsert.style.display = "inline-block";
+        spanInsert.style.margin = "2px";
+        spanInsert.style.fontSize = "20px";
+        spanInsert.style.padding = "2px";
+        spanInsert.style.textAlign = "center";
+        spanInsert.style.backgroundColor = "blue";
+        spanInsert.textContent = str;
+        return spanInsert;
+
+
+    }
+
+    init();
+</script>
+</body>
+</html>

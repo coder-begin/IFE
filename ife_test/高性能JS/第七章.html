@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>第七章</title>
+</head>
+<body>
+
+<script>
+    /*
+    3中ajax请求方式
+    1.XHR
+    2.脚本注入
+    3.MXHR
+    xhr:可以控制传输状态，但是不能跨域请求数据
+    脚本注入:使用js的src属性导入脚本，回掉使用，可以跨域，但是不能控制状态，不能发送post请求，速度最快
+    MXHR:xhr的升级本，只需要定义一个HTTP请求可以获取到多个信息
+    xhr和mxhr区别在于xhr需要设置请求参数，如name=?，id=?来获取服务端指定信息
+    mxhr并不需要设置参数，直接请求，返回的是满足的数据集字符串，如返回一个图片集的地址src
+    因为mxhr一般返回的数据都是比较大的，所以在状态为3的时候就可以开始处理了，设置轮询，而且因为是分段处理数据，所以不会缓存数据
+
+
+    4.在处理数据的时候json-p和自定义格式是最好的选择
+    5.设置expires来缓存数据是最好的方法
+    6.
+
+
+
+
+*/
+/*
+
+轮询算法:
+ var req=new XMLHttpRequest();
+ var getLastInterval=null;
+ var lastLength=0;
+
+ req.onreadystatechange=readyStateHandle;
+ req.open("GET",url,false);
+ 注:普通xhr请求在url设置的时候会带入参数，然后设置响应头部
+ req.send(null);
+
+
+
+ function readyStateHandle(){
+ if(req.readyState==3&&getLastInterval==null){
+ getLastInterval=window.setInterval(function(){
+ getLastPackage();
+ },25);
+
+ }
+ if(req.readyState==4){
+ clearInterval(getLastInterval);
+ getLastPackage();
+ }
+
+
+ }
+ function  getLastPackage(){
+ var length=req.responseText.length;
+ var package=req.responseText.substr(lastLength,length);
+ lastLength=length;
+ dealPackage(package);
+
+
+ }
+
+
+ */
+
+</script>
+</body>
+</html>

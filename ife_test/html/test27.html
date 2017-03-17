@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>test26</title>
+    <style type="text/css">
+        #control button {
+
+            font-size: 16px;
+            text-align: center;
+            margin: 6px;
+
+        }
+
+        #universe * {
+
+            float: left;
+
+        }
+        #tableInfo thead tr td{
+
+
+            font:bold 18px "楷体";
+
+
+        }
+        #bodyShipInfo *{
+            border: 1px solid #CDB1B1 ;
+            font:bold 18px "楷体";
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div id="universe" style="height: 400px;width: 600px;background-color: black;position: absolute;">
+
+    <canvas height="140" width="140" style="position: absolute;left: 150px;top: 130px;" id="arc"></canvas>
+
+</div>
+<div style="width: 600px;height: 400px;border: 1px solid gray;margin-left: 650px">
+        <table id="tableInfo" style="margin: 20px;border-spacing: inherit">
+            <thead style="background-color: #CDB1B1;">
+                <tr>
+                    <td><span>飞船&nbsp;</span></td>
+                    <td><span>动力系统&nbsp;  </span></td>
+                    <td><span>能源系统 &nbsp; </span></td>
+                    <td><span>当前飞行状态 &nbsp; </span></td>
+                    <td><span>剩余能量 &nbsp; </span></td>
+                </tr>
+
+            </thead>
+            <tbody id="bodyShipInfo">
+
+
+            </tbody>
+
+        </table>
+</div>
+
+<div style="margin-top: 10px;width: 1250px;height: 100px;border: 1px solid black;" id="control">
+    <div style="margin: 6px" id="dynamicalSys">
+        <span>动力系统选择:</span>
+        <input type="radio" checked="true"><span>前进号  (速率30px/s,能耗5%/s)  </span>
+        <input type="radio"><span>奔腾号  (速率50px/s,能耗7%/s)  </span>
+        <input type="radio"><span>超越号  (速率80px/s,能耗9%/s)  </span>
+    </div>
+    <div style="margin: 6px" id="energySys">
+        <span>能源系统选择:</span>
+        <input type="radio" checked="true"><span>劲量型  (补充能源速度2%/s)  </span>
+        <input type="radio"><span>光能号  (补充能源速度3%/s)  </span>
+        <input type="radio"><span>永久号  (补充能源速度4%/s)  </span>
+    </div>
+    <button id="newShipFly">新飞船起飞</button>
+</div>
+
+<div id="shipsList" style="border: 1px solid gray;width: 1250px;">
+
+
+</div>
+
+
+<script type="text/javascript" src="../js/addCode.js"></script>
+<script type="text/javascript">
+    addCode("../js/test27.js", function () {
+    });
+
+</script>
+</body>
+</html>
