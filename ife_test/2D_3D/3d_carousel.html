@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3d轮播器</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .stage {
+            width: 600px;
+            height: 400px;
+            margin: 100px auto;
+            background-color: skyblue;
+            perspective: 900px;
+        }
+
+        .stage ul {
+            transform-style: preserve-3d;
+            position: relative;
+            width: 200px;
+            height: 200px;
+            top: 150px;
+            left: 200px;
+            animation: carousel 9s linear 0s infinite normal;
+
+        }
+
+        .stage ul li {
+            list-style: none;
+            position: absolute;
+            width: 200px;
+            height: 100px;
+
+        }
+
+        .stage ul li:nth-of-type(1) {
+            background-color: red;
+            transform: rotateY(60deg) translateZ(-200px);
+        }
+
+        .stage ul li:nth-of-type(2) {
+            background-color: green;
+            transform: rotateY(120deg) translateZ(-200px);
+        }
+
+        .stage ul li:nth-of-type(3) {
+            background-color: blue;
+            transform: rotateY(180deg) translateZ(-200px);
+        }
+
+        .stage ul li:nth-of-type(4) {
+            background-color: pink;
+            transform: rotateY(240deg) translateZ(-200px);
+        }
+
+        .stage ul li:nth-of-type(5) {
+            background-color: purple;
+            transform: rotateY(300deg) translateZ(-200px);
+        }
+
+        .stage ul li:nth-of-type(6) {
+            background-color: yellow;
+            transform: rotateY(360deg) translateZ(-200px);
+        }
+        .stage ul:hover{
+            animation-play-state: paused;
+        }
+        .stage ul:hover li img{
+            opacity: 0.5;
+        }
+        .stage ul li img:hover {
+            opacity: 1;
+        }
+        .stage img{
+            width: 200px;
+            height: 100px;
+        }
+
+        @keyframes carousel {
+            from {
+                transform:  rotateX(-10deg) rotateY(0deg) ;
+            }
+            to {
+                transform:  rotateX(-10deg) rotateY(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="stage">
+    <ul>
+        <li><img src="../img/timg1.jpg" alt=""></li>
+        <li><img src="../img/timg2.jpg" alt=""></li>
+        <li><img src="../img/timg3.jpg" alt=""></li>
+        <li><img src="../img/timg4.jpg" alt=""></li>
+        <li><img src="../img/timg5.jpg" alt=""></li>
+        <li><img src="../img/timg.jpg" alt=""></li>
+    </ul>
+
+</div>
+
+
+</body>
+</html>

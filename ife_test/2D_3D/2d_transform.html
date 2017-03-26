@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container{
+            perspective: 500px;
+            width: 500px;
+            height: 800px;
+            background-color: skyblue;
+            border: 1px solid #000;
+            margin: 0 auto;
+        }
+        .container img{
+            width: 500px;
+            height: 800px;
+            transition: transform 1s;
+            transform-origin: center bottom;
+        }
+        .container:hover img{
+            transform: rotateX(90deg);
+
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <img src="../img/timg.jpg">
+    
+    
+</div>
+</body>
+</html>

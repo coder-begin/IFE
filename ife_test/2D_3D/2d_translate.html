@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>手风琴效果</title>
+    <style>
+        ul{
+            margin: 100px auto;
+            width: 1000px;
+            height: 400px;
+            overflow: hidden;
+
+        }
+        ul li{
+            list-style: none;
+            float: left;
+            width: 200px;
+            height: 400px;
+            transition: width 1.5s;
+        }
+        ul li img{
+            height: 400px;
+        }
+        ul:hover li{
+            width: 120px;
+        }
+        ul li:hover{
+            width: 500px;
+        }
+
+    </style>
+</head>
+<body>
+<ul>
+    <li><img src="../img/timg.jpg" alt=""></li>
+    <li><img src="../img/timg.jpg" alt=""></li>
+    <li><img src="../img/timg.jpg" alt=""></li>
+    <li><img src="../img/timg.jpg" alt=""></li>
+    <li><img src="../img/timg.jpg" alt=""></li>
+</ul>
+
+
+
+</body>
+</html>

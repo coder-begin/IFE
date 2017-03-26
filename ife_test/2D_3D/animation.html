@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动画</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: 300px auto;
+            width: 400px;
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container ul {
+            width: 2000px;
+            height: 400px;
+
+        }
+
+        .container ul li {
+            float: left;
+            list-style: none;
+        }
+
+        .container img {
+            width: 400px;
+            height: 400px;
+        }
+
+        .container #rightArrow {
+            width: 50px;
+            height: 80px;
+            font-size: 30px;
+            position: absolute;
+            top: 50%;
+            margin-top: -40px;
+            left: 0;
+        }
+
+        .container #leftArrow {
+            width: 50px;
+            height: 80px;
+            font-size: 30px;
+            position: absolute;
+            top: 50%;
+            margin-top: -40px;
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <ul>
+        <li><img src="../img/1.jpg"></li>
+        <li><img src="../img/timg2.jpg"></li>
+        <li><img src="../img/timg3.jpg"></li>
+        <li><img src="../img/timg4.jpg"></li>
+        <li><img src="../img/1.jpg"></li>
+    </ul>
+    <button id="rightArrow">
+        &lt;
+    </button>
+    <button id="leftArrow">
+        &gt;
+    </button>
+</div>
+<script>
+    var num = 0, ulDir = 0;
+    var rightBtn = document.getElementById("rightArrow");
+    var leftBtn = document.getElementById("leftArrow");
+    var ulElem = document.querySelector(".container ul");
+    ulElem.style.transition = "margin-left 1s";
+    rightBtn.onclick = function () {
+
+        num++;
+        ulDir -= 400;
+        if (num== 4) {
+            ulDir = 0;
+            num = 0;
+        }
+
+        ulElem.style.marginLeft = ulDir + "px";
+
+    };
+    leftBtn.onclick = function () {
+        num--;
+        ulDir += 400;
+        if (num <0) {
+            ulDir = -1200;
+            num = 3;
+        }
+        document.querySelector(".container ul").style.marginLeft = ulDir + "px";
+
+    };
+    /*
+     var ulDir=0;
+     var num= 0,setTime=0;
+     num++;
+     if(num==4){
+     ulDir=0;
+     num=0;
+     }
+     setTimeout(function(){
+     setTime++;
+     if(setTime<11){
+     ulDir-=40;
+     document.querySelector(".container ul").style.marginLeft=ulDir+"px";
+     setTimeout(arguments.callee,40);
+     }else{
+     setTime=0;
+     }
+     },40)
+     */
+</script>
+</body>
+</html>
